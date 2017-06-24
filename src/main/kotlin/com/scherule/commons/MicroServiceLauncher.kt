@@ -10,13 +10,7 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.util.Scanner
 
-class MicroServiceLauncher : Launcher() {
-
-    companion object {
-        fun main(args: Array<String>) {
-            MicroServiceLauncher().dispatch(args)
-        }
-    }
+open class MicroServiceLauncher : Launcher() {
 
     override fun beforeStartingVertx(options: VertxOptions?) {
         options!!.setClustered(true).clusterHost = "127.0.0.1"
@@ -29,7 +23,7 @@ class MicroServiceLauncher : Launcher() {
             deploymentOptions.config = JsonObject()
         }
 
-        val conf = File("src/conf/config.json")
+        val conf = File(ClassLoader.getSystemResource("vertx.json").file);
         deploymentOptions.config.mergeIn(getConfiguration(conf))
     }
 

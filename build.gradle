@@ -35,8 +35,10 @@ sourceCompatibility = '1.8'
 mainClassName = 'io.vertx.core.Launcher'
 
 def vertxVersion = '3.4.2'
+def cfg4jVersion = '4.0.0'
 
 dependencies {
+    compile "org.cfg4j:cfg4j-core:$cfg4jVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     compile "io.vertx:vertx-core:$vertxVersion"
     compile "io.vertx:vertx-reactive-streams:$vertxVersion"

@@ -15,7 +15,7 @@ import java.util.*
 
 open class MicroServiceVerticle : AbstractVerticle() {
 
-    private lateinit var rxVertx: Vertx
+    protected lateinit var rxVertx: Vertx
     private lateinit var discovery: ServiceDiscovery
     private val registeredRecords: MutableSet<Record> = ConcurrentHashSet()
 
