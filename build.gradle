@@ -6,20 +6,26 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
-}
-
-plugins {
-    id "com.jfrog.bintray" version "1.7.3"
 }
 
 apply plugin: 'application'
 apply plugin: 'kotlin'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
 
 bintray {
     user = 'kboom'
     key = '94818fa1c90d39a207aeebd7d4301b82146dedf4'
     publications = ['BintrayPublication']
+    pkg {
+        repo = 'scherule'
+        name = 'scherule-commons'
+        userOrg = 'kboom'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/Scherule/Scherule-commons'
+    }
 }
 
 publishing {
