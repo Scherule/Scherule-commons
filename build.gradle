@@ -56,7 +56,7 @@ compileTestKotlin {
 }
 
 group 'com.scherule'
-version = '1.0-SNAPSHOT'
+version = '1.0'
 
 sourceCompatibility = '1.8'
 mainClassName = 'io.vertx.core.Launcher'
