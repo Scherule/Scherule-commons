@@ -19,6 +19,11 @@ open class MicroServiceVerticle : AbstractVerticle() {
     private lateinit var discovery: ServiceDiscovery
     private val registeredRecords: MutableSet<Record> = ConcurrentHashSet()
 
+    override fun start(startFuture: Future<Void>) {
+        super.start(startFuture)
+        start()
+    }
+
     override fun start() {
         rxVertx = Vertx.newInstance(vertx)
         discovery = ServiceDiscovery.create(vertx, ServiceDiscoveryOptions().setBackendConfiguration(config()))

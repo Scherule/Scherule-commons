@@ -34,7 +34,7 @@ publishing {
             from components.java
             groupId 'com.scherule'
             artifactId 'scherule-commons'
-            version '1.1'
+            version '1.1.1'
         }
     }
 }
