@@ -10,6 +10,7 @@ import io.vertx.servicediscovery.ServiceDiscoveryOptions
 import io.vertx.servicediscovery.types.EventBusService
 import io.vertx.servicediscovery.types.HttpEndpoint
 import io.vertx.servicediscovery.types.MessageSource
+import rx.Completable
 import rx.Single
 import java.util.*
 
@@ -49,21 +50,20 @@ open class MicroServiceVerticle : AbstractVerticle() {
         publish(record, completionHandler)
     }
 
-
-    fun rxPublishHttpEndpoint(name: String, host: String, port: Int): Single<Void> {
+    fun rxPublishHttpEndpoint(name: String, host: String, port: Int): Completable {
         val record = io.vertx.rxjava.servicediscovery.types.HttpEndpoint.createRecord(name, host, port, "/")
         return rxPublish(record)
     }
 
-    fun rxPublishMessageSource(name: String, address: String): Single<Void> {
+    fun rxPublishMessageSource(name: String, address: String): Completable {
         val record = io.vertx.rxjava.servicediscovery.types.MessageSource.createRecord(name, address)
         return rxPublish(record)
     }
 
-    private fun rxPublish(record: Record): Single<Void> {
+    private fun rxPublish(record: Record): Completable {
         val adapter = RxHelper.observableFuture<Void>()
         publish(record, adapter.toHandler())
-        return adapter.toSingle()
+        return adapter.toCompletable()
     }
 
     private fun publish(record: Record, completionHandler: Handler<AsyncResult<Void>>) {
@@ -71,7 +71,7 @@ open class MicroServiceVerticle : AbstractVerticle() {
             if (ar.succeeded()) {
                 registeredRecords.add(record)
             }
-            completionHandler.handle(ar.map<Void>(null as Void?))
+            completionHandler.handle(null)
         }
     }
 
