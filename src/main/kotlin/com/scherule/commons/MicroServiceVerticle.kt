@@ -71,7 +71,7 @@ open class MicroServiceVerticle : AbstractVerticle() {
             if (ar.succeeded()) {
                 registeredRecords.add(record)
             }
-            completionHandler.handle(null)
+            completionHandler.handle(ar.map<Void>(null as Void?))
         }
     }
 
