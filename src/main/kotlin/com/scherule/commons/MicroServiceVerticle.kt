@@ -11,7 +11,6 @@ import io.vertx.servicediscovery.types.EventBusService
 import io.vertx.servicediscovery.types.HttpEndpoint
 import io.vertx.servicediscovery.types.MessageSource
 import rx.Completable
-import rx.Single
 import java.util.*
 
 open class MicroServiceVerticle : AbstractVerticle() {
@@ -21,7 +20,6 @@ open class MicroServiceVerticle : AbstractVerticle() {
     private val registeredRecords: MutableSet<Record> = ConcurrentHashSet()
 
     override fun start(startFuture: Future<Void>) {
-        super.start(startFuture)
         start()
     }
 
